@@ -5,7 +5,6 @@ def summa(n):
         rest = n % 10
         div = n // 10
         return(summa(div)+rest)
-        summa(div,total)
     else:
         return n
 
