@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 def bounce(n):
     if n > 0:
         print(n),
