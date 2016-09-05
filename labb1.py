@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 import math
 def sockerkaka(antal):
@@ -13,7 +13,5 @@ def sockerkaka(antal):
     +egg+sugar+vanilla+bakingsoda+flour+butter+water)
     return(recept)
 
-kakafor4 = sockerkaka(4)
-kakafor7 = sockerkaka(7)
 
-print(kakafor4+"\n"+kakafor7)
+print(sockerkaka(1)+"\n"+sockerkaka(7))
