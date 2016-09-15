@@ -9,7 +9,6 @@ def derivate(f,x,h):
 def solve(f,x0,h,str):
     xn = x0
     while True:
-        print("1")
         if (xn - (xn -((f(xn))/derivate(f,xn,h)))) > 0:
             if (xn - (xn -((f(xn))/derivate(f,xn,h)))) < h:
                 break
@@ -36,4 +35,4 @@ def xMeUMx(x):
 
 solve(xsquareM1,-4,0.0001,"ETT")
 solve(twoupxM1,-9,0.00001,"NOLL")
-solve(xMeUMx,1,0.00001,"e")
+solve(xMeUMx,1123,0.000000001,"e")
