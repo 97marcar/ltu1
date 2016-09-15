@@ -2,7 +2,7 @@
 
 import math
 def sockerkaka(antal):
-    egg = str(int(math.ceil((antal*3.0/4))))+" egg(s)\n"
+    egg = str(int(math.ceil((antal*3.0/4))))+" ägg\n"
     sugar = str(antal*3.0/4)+" dl sugar\n"
     vanilla = str(antal*2.0/4)+" tbs vanilla\n"
     bakingsoda = str(antal*2.0/4)+" tbs bakingsoda\n"
