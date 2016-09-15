@@ -1,38 +1,28 @@
-
+# -*- coding: utf-8 -*-
 
 import math
+
 def derivate(f,x,h):
     answer = (f(x+h) - f(x-h))/(2*h)
     return(answer)
 
-def solve(f,x0,h):
-    nextcheck = 0
+def solve(f,x0,h,str):
     xn = x0
     while True:
+        print("1")
         if (xn - (xn -((f(xn))/derivate(f,xn,h)))) > 0:
             if (xn - (xn -((f(xn))/derivate(f,xn,h)))) < h:
-                print(h)
-                print(xn - (xn -((f(xn))/derivate(f,xn,h))))
                 break
             else:
                 xn = xn -((f(xn))/derivate(f,xn,h))
         elif (xn - (xn -((f(xn))/derivate(f,xn,h)))) < 0:
-            print("iii")
-            if (xn - (xn -((f(xn))/derivate(f,xn,h)))) < (h*-1):
-                print(h)
-                print(xn - (xn -((f(xn))/derivate(f,xn,h))))
+            if (xn - (xn -((f(xn))/derivate(f,xn,h)))) > (h*-1):
                 break
             else:
                 xn = xn -((f(xn))/derivate(f,xn,h))
         else:
             xn = xn -((f(xn))/derivate(f,xn,h))
-
-        nextcheck += 1
-        if nextcheck >= 1000:
-             print(h)
-             print(xn - (xn -((f(xn))/derivate(f,xn,h))))
-             break
-    print(xn)
+    print(xn,str)
 
 
 def xsquareM1(x):
@@ -44,6 +34,6 @@ def twoupxM1(x):
 def xMeUMx(x):
     return(x-(math.e**(-x)))
 
-solve(xsquareM1,4,0.0001)
-solve(twoupxM1,-13,0.000000001)
-solve(xMeUMx,1,0.00001)
+solve(xsquareM1,-4,0.0001,"ETT")
+solve(twoupxM1,-9,0.00001,"NOLL")
+solve(xMeUMx,1,0.00001,"e")
