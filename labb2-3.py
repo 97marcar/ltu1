@@ -8,7 +8,7 @@ def summa(n):
     else:
         return n
 
-print(summa(123))
+print(summa(123456789))
 
 def summa2(n):
     total = 0
@@ -19,4 +19,4 @@ def summa2(n):
         n = div
     return total
 
-print(summa2(123))
+print(summa2(123456789))

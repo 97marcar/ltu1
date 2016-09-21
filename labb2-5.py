@@ -15,6 +15,9 @@ def xsquared(x):
 def halfx(x):
     return(x/2)
 
+def xMeUMx(x):
+    return(x-(math.e**(-x)))
+
 print(derivate(twox,math.pi,0.0001))
 print(derivate(xsquared,math.pi,0.0001))
 print(derivate(halfx,math.pi,0.0001))

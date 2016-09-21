@@ -6,7 +6,7 @@ def derivate(f,x,h):
     answer = (f(x+h) - f(x-h))/(2*h)
     return(answer)
 
-def solve(f,x0,h,str):
+def solve(f,x0,h):
     xn = x0
     while True:
         if (xn - (xn -((f(xn))/derivate(f,xn,h)))) > 0:
@@ -21,7 +21,7 @@ def solve(f,x0,h,str):
                 xn = xn -((f(xn))/derivate(f,xn,h))
         else:
             xn = xn -((f(xn))/derivate(f,xn,h))
-    print(xn,str)
+    return(xn)
 
 
 def xsquareM1(x):
@@ -33,6 +33,6 @@ def twoupxM1(x):
 def xMeUMx(x):
     return(x-(math.e**(-x)))
 
-solve(xsquareM1,-4,0.0001,"ETT")
-solve(twoupxM1,-9,0.00001,"NOLL")
-solve(xMeUMx,1123,0.000000001,"e")
+print(solve(xsquareM1,-4,0.0001))
+print(solve(twoupxM1,-9,0.00001))
+print(solve(xMeUMx,1123,0.000000001))
