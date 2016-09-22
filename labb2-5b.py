@@ -8,19 +8,10 @@ def derivate(f,x,h):
 
 def solve(f,x0,h):
     xn = x0
-    while True:
-        if (xn - (xn -((f(xn))/derivate(f,xn,h)))) > 0:
-            if (xn - (xn -((f(xn))/derivate(f,xn,h)))) < h:
-                break
-            else:
-                xn = xn -((f(xn))/derivate(f,xn,h))
-        elif (xn - (xn -((f(xn))/derivate(f,xn,h)))) < 0:
-            if (xn - (xn -((f(xn))/derivate(f,xn,h)))) > (h*-1):
-                break
-            else:
-                xn = xn -((f(xn))/derivate(f,xn,h))
-        else:
-            xn = xn -((f(xn))/derivate(f,xn,h))
+    x_nMx_n1 = (xn - (xn -((f(xn))/derivate(f,xn,h))))
+    while (x_nMx_n1 > 0 and x_nMx_n1 > h) or (x_nMx_n1 < 0 and x_nMx_n1 < (h*-1)):
+        xn = xn -((f(xn))/derivate(f,xn,h))
+        x_nMx_n1 = (xn - (xn -((f(xn))/derivate(f,xn,h))))
     return(xn)
 
 
@@ -36,3 +27,16 @@ def xMeUMx(x):
 print(solve(xsquareM1,-4,0.0001))
 print(solve(twoupxM1,-9,0.00001))
 print(solve(xMeUMx,1123,0.000000001))
+
+"""if  (xn - (xn -((f(xn))/derivate(f,xn,h)))) > 0:
+    if (xn - (xn -((f(xn))/derivate(f,xn,h)))) < h:
+        break
+    else:
+        xn = xn -((f(xn))/derivate(f,xn,h))
+elif (xn - (xn -((f(xn))/derivate(f,xn,h)))) < 0:
+    if (xn - (xn -((f(xn))/derivate(f,xn,h)))) > (h*-1):
+        break
+    else:
+        xn = xn -((f(xn))/derivate(f,xn,h))
+else:
+    xn = xn -((f(xn))/derivate(f,xn,h))"""
