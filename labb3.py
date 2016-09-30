@@ -1,5 +1,5 @@
-sla_upp = ["123","bok","stor"]
-beskrivning = ["123","sak","liten"]
+sla_upp = []
+beskrivning = []
 
 def ordlistaLIST(sla_upp, beskrivning):
     print("1: Insert")
@@ -52,13 +52,43 @@ def ordlistaTUPLE(tuplelist):
                 ordlistaTUPLE(tuplelist)
         if word_found == False:
                 print("That item is not in the dictionary")
-                ordlistaLIST(sla_upp,beskrivning)
+                ordlistaTUPLE(tuplelist)
     elif choice == 3:
         return
     else:
         print("Please choose option 1,2 or 3.")
         ordlistaTUPLE(tuplelist)
+        
+dictionary = {}
+def ordlistaDICT(dictionary):
+    print("1: Insert")
+    print("2: Lookup")
+    print("3: Exit program")
+    choice = int(input("Choose alternative: "))
+    if choice == 1:
+        word_to_insert = raw_input("Word to insert: ")
+        description_of_word = raw_input("Description of word: ")
+        dictionary[word_to_insert] = description_of_word
+        ordlistaDICT(dictionary)
+    elif  choice == 2:
+        index = ""
+        word_to_lookup = raw_input("Word to lookup: ")
+        word_found = False
+        for n in range(len(dictionary)):
+            if word_to_lookup == dictionary.keys()[n]:
+                word_found = True
+                print("Description for "+dictionary.keys()[n]+ ": "+ dictionary.values()[n])
+                ordlistaDICT(dictionary)
+        if word_found == False:
+                print("That item is not in the dictionary")
+                ordlistaDICT(dictionary)
+    elif choice == 3:
+        return
+    else:
+        print("Please choose option 1,2 or 3.")
+        ordlistaDICT(dictionary)
 
 #ordlistaTUPLE(tuplelist)
 
-ordlistaLIST(sla_upp,beskrivning)
+#ordlistaLIST(sla_upp,beskrivning)
+ordlistaDICT(dictionary)

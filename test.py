@@ -17,3 +17,5 @@ print(states.values()[1])
 print(states.values()[2])
 print(states.values()[3])
 print(states.values()[4])
+
+print(len(states))
