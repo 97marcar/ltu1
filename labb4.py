@@ -1,12 +1,17 @@
 import csv
 class Telefonbok():
+    """En klass som innehåller en telefonbok med ett antal olika
+    funktioner(lägg till, ta bort ändra mm.)"""
     def __init__(self):
+        """Konstruktorn, körs när klassen först körs"""
         self.bool1 = True
         self.numberOfNames = 0
         self.phonebook = []
         self.mainMenu()
 
     def mainMenu(self):
+        """Skriver ut menyn till användaren så han/hon enkelt kan
+        se alla typer av kommandon som kan utföras"""
         print("\nTelephone book")
         print("Main Menu")
         print("Following commands exists: ")
@@ -21,12 +26,20 @@ class Telefonbok():
         self.command()
 
     def command(self):
+        """Hanterar inputen som sker av användaren och ser till
+        att rätt funktion körs beroende på vad som skrivs in."""
         while True:
             try:
+                #Tar in input från användaren och beroende
+                #på hur många ord som skrivs hanteras datan
+                #olika.
                 theInput = raw_input(">>> ").strip()
                 print(self.phonebook)
                 print(theInput)
                 spaces = theInput.count(" ")
+
+                #Ser till att ";" inte används i namnet pga
+                #load och save funktionerna
                 if ";" in theInput:
                     print('The symbol ";" is not allowed')
                     spaces = 666
@@ -51,6 +64,7 @@ class Telefonbok():
             except:
                 print("Error")
 
+        #Nedan skickas data till respektive funktion
         if spaces == 0:
             if givenCommand == "quit":
                 return
@@ -98,6 +112,9 @@ class Telefonbok():
             self.command()
 
     def add(self, name, number):
+        """Tar in ett namn och ett number som argument och
+        lägger till dem i telefonboken så länge nummret inte
+        är upptaget."""
         self.searchForSameNumber(number)
         if self.bool1 == True:
             self.phonebook.append([number,name])
@@ -109,6 +126,10 @@ class Telefonbok():
             self.command()
 
     def alias(self,name, alias, number=False):
+        """Lägger till namn till de redan existerande personer i
+        telefonboken. Tar in namn och alias som argument vilket räcker
+        så länge det bara finns en person med samma namn annars behövs
+        nummret också."""
         self.countSameNames(name)
         if self.numberOfNames == 1:
             for n in range(len(self.phonebook)):
@@ -137,6 +158,10 @@ class Telefonbok():
         self.command()
 
     def change(self,name, newnum, currentnum=False):
+        """Redigerar det existerande nummret till en kontakt.
+        Tar in namn och det nya telefonboken. Det räcker så länge det
+        bara finns en person med samma namn annars behövs det gamla
+        nummret också"""
         self.countSameNames(name)
         if self.numberOfNames == 1:
             for n in range(len(self.phonebook)):
@@ -167,6 +192,8 @@ class Telefonbok():
         self.command()
 
     def remove(self,name,number):
+        """Tar bort en kontakt från telefonboken. Tar in namn
+        och nummer."""
         for n in range(len(self.phonebook)):
             if name in self.phonebook[n] and name != self.phonebook[n][0]:
                 del self.phonebook[n]
@@ -174,6 +201,7 @@ class Telefonbok():
                 self.command()
 
     def lookup(self, name):
+        """Skriver ut alla nummer som tillhör ett visst namn."""
         self.countSameNames(name)
         if self.numberOfNames == 0:
             print("The name is not in the phonebook.")
@@ -186,9 +214,9 @@ class Telefonbok():
             self.command()
             return
 
-
-
     def save(self,name):
+        """Sparar telefonboken i en csvfil med namn som väljs av
+        användaren."""
         with open(name+".csv","wb") as csvfile:
             write = csv.writer(csvfile, delimiter=';')
             for n in range(len(self.phonebook)):
@@ -196,6 +224,7 @@ class Telefonbok():
         self.command()
 
     def load(self,name):
+        """Laddar en csvfil som innehållet en telefonbok."""
         self.phonebook = []
         try:
             with open(name+".csv", "rb") as csvfile:
@@ -208,12 +237,15 @@ class Telefonbok():
             self.command()
 
     def countSameNames(self, name):
+        """Räknar antalet av samma namn som finns i telefonboken."""
         self.numberOfNames = 0
         for n in range(len(self.phonebook)):
             if name in self.phonebook[n] and name != self.phonebook[n][0]:
                 self.numberOfNames += 1
 
     def searchForSameNumber(self, number):
+        """Kolla om ett nummer finns i ordboken eller inte.
+        Get en variabel värdet sant eller falsk"""
         for n in range(len(self.phonebook)):
             if self.phonebook[n][0] == number:
                 self.bool1 = False
