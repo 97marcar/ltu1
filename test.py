@@ -1,14 +1,15 @@
-while True:
-            try:
-                temp = raw_input(">>> ").strip()
-                spaces = temp.count(" ")
-                print(spaces)
-                if spaces == 1:
-                    givenOption, name = temp.split()
-                    print(givenOption, name )
-                elif spaces == 2:
-                    givenOption, name, number = temp.split()
-                    print(givenOption, name, number)
-                break
-            except:
-                print("asdasa")
+import csv
+lista = [["abc","123","hehe"]]
+
+with open("test.csv","wb") as csvfile:
+    write = csv.writer(csvfile, delimiter=';')
+    for n in range(len(lista)):
+        write.writerow(lista[n])
+
+lista = ["aaa"]
+with open('test.csv', 'rb') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=';')
+    for row in spamreader:
+        lista.append(row)
+
+print lista
