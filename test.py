@@ -1,21 +1,14 @@
-states = {
-    ("Orgeno",'Oregon'): 'OR',
-    'Florida': 'FL',
-    'California': 'CA',
-    'New York': 'NY',
-    'Michigan': 'MI'
-}
-
-print(states.keys()[0])
-print(states.keys()[1])
-print(states.keys()[2])
-print(states.keys()[3])
-print(states.keys()[4][0])
-
-print(states.values()[0])
-print(states.values()[1])
-print(states.values()[2])
-print(states.values()[3])
-print(states.values()[4])
-
-print(len(states))
+while True:
+            try:
+                temp = raw_input(">>> ").strip()
+                spaces = temp.count(" ")
+                print(spaces)
+                if spaces == 1:
+                    givenOption, name = temp.split()
+                    print(givenOption, name )
+                elif spaces == 2:
+                    givenOption, name, number = temp.split()
+                    print(givenOption, name, number)
+                break
+            except:
+                print("asdasa")
