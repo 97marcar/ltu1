@@ -193,7 +193,6 @@ class Telefonbok():
         if self.numberOfNames == 1:
             for n in range(len(self.phonebook)):
                 if name in self.phonebook[n] and name != self.phonebook[n][0]:
-                    print(name, newnum,"aaaa")
                     self.searchForSameNameAndNumber2(name, newnum)
                     if self.bool1 == True:
                         self.phonebook[n][0] = newnum
@@ -312,15 +311,9 @@ class Telefonbok():
         """Kolla om ett nummer finns i ordboken eller inte.
         Get en variabel värdet sant eller falsk"""
         for n in range(len(self.phonebook)):
-            print(n,"NNNNNNNN")
-            print(name,"NAMN")
-            print(number,"NUMMER")
             if name in self.phonebook[n]:
                 for i in self.phonebook[n]:
-                    print(n, "N")
-                    print(i, "I")
                     if number in self.phonebook[n] and i in self.phonebook[n]:
-                        print("AAAAAAAAAAAAAAAa")
                         self.bool1 = False
                         return
         self.bool1 = True
@@ -329,15 +322,9 @@ class Telefonbok():
         """Kolla om ett nummer finns i ordboken eller inte.
         Get en variabel värdet sant eller falsk"""
         for n in range(len(self.phonebook)):
-            print(n,"NNNNNNNN")
-            print(name,"NAMN")
-            print(number,"NUMMER")
             if number in self.phonebook[n]:
                 for i in self.phonebook[n]:
-                    print(n, "N")
-                    print(i, "I")
-                    if number in self.phonebook[n] and i in self.phonebook[n]:
-                        print("AAAAAAAAAAAAAAAa")
+                    if i in self.phonebook[n]:
                         self.bool1 = False
                         return
         self.bool1 = True
