@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 import csv
+
 class Telefonbok():
     """En klass som innehåller en telefonbok med ett antal olika
     funktioner(lägg till, ta bort ändra mm.)"""
@@ -34,8 +36,6 @@ class Telefonbok():
                 #på hur många ord som skrivs hanteras datan
                 #olika.
                 theInput = raw_input(">>> ").strip()
-                print(self.phonebook)
-                print(theInput)
                 spaces = theInput.count(" ")
 
                 #Ser till att ";" inte används i namnet pga
@@ -81,6 +81,8 @@ class Telefonbok():
                 self.save(arg1)
             elif givenCommand == "load":
                 self.load(arg1)
+            elif givenCommand == "remove":
+                self.remove(arg1)
             else:
                 print("Please enter a valid command.")
                 self.command()
@@ -191,14 +193,32 @@ class Telefonbok():
         print('There is no contact by that name.')
         self.command()
 
-    def remove(self,name,number):
+    def remove(self,name,number=False):
         """Tar bort en kontakt från telefonboken. Tar in namn
         och nummer."""
-        for n in range(len(self.phonebook)):
-            if name in self.phonebook[n] and name != self.phonebook[n][0]:
-                del self.phonebook[n]
-                print("Removed.")
-                self.command()
+        self.countSameNames(name)
+        if self.numberOfNames == 1:
+            for n in range(len(self.phonebook)):
+                if name in self.phonebook[n] and name != self.phonebook[n][0]:
+                    del self.phonebook[n]
+                    print("Removed.")
+                    self.command()
+                    return
+        elif self.numberOfNames > 1 and number == False:
+            print("There are multiple contacts by that name.")
+            print("Please write remove [name] [number]")
+            self.command()
+            return
+
+        elif self.numberOfNames > 1 and number != False:
+            for n in range(len(self.phonebook)):
+                if (name in self.phonebook[n] and name != self.phonebook[n][0]) and self.phonebook[n][0] == number:
+                    del self.phonebook[n]
+                    print("Removed.")
+                    self.command()
+                    return
+        print("There is no contact with that name and number.")
+        self.command()
 
     def lookup(self, name):
         """Skriver ut alla nummer som tillhör ett visst namn."""
@@ -217,10 +237,14 @@ class Telefonbok():
     def save(self,name):
         """Sparar telefonboken i en csvfil med namn som väljs av
         användaren."""
-        with open(name+".csv","wb") as csvfile:
-            write = csv.writer(csvfile, delimiter=';')
-            for n in range(len(self.phonebook)):
-                write.writerow(self.phonebook[n])
+        try:
+            with open(name+".csv","wb") as csvfile:
+                write = csv.writer(csvfile, delimiter=';')
+                for n in range(len(self.phonebook)):
+                    write.writerow(self.phonebook[n])
+                    print("File saved.")
+        except:
+            print("Error saving file.")
         self.command()
 
     def load(self,name):
