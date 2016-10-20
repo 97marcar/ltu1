@@ -308,7 +308,7 @@ class Telefonbok():
                 self.numberOfNames += 1
 
     def searchForSameNameAndNumber(self, name, number):
-        """Kolla om ett nummer finns i ordboken eller inte.
+        """Kolla om ett nummer och namn finns i ordboken eller inte.
         Get en variabel värdet sant eller falsk"""
         for n in range(len(self.phonebook)):
             if name in self.phonebook[n]:
@@ -319,8 +319,8 @@ class Telefonbok():
         self.bool1 = True
 
     def searchForSameNameAndNumber2(self, name, number):
-        """Kolla om ett nummer finns i ordboken eller inte.
-        Get en variabel värdet sant eller falsk"""
+        """Kolla om ett nummer och namn finns i ordboken eller inte.
+        Get en variabel värdet sant eller falsk."""
         for n in range(len(self.phonebook)):
             if number in self.phonebook[n]:
                 for i in self.phonebook[n]:
