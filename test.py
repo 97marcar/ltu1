@@ -1,3 +1,4 @@
+
 def firstDiff(lst1, lst2):
     if lst1 == lst2:
         return len(lst1)
