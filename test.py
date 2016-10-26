@@ -1,21 +1,13 @@
-states = {
-    ("Orgeno",'Oregon'): 'OR',
-    'Florida': 'FL',
-    'California': 'CA',
-    'New York': 'NY',
-    'Michigan': 'MI'
-}
+def firstDiff(lst1, lst2):
+    if lst1 == lst2:
+        return len(lst1)
+    elif lst1[0] != lst2[0]:
+        return 0
+    else:
+        return (1 + firstDiff(lst1[1:],lst2[1:]))
 
-print(states.keys()[0])
-print(states.keys()[1])
-print(states.keys()[2])
-print(states.keys()[3])
-print(states.keys()[4][0])
 
-print(states.values()[0])
-print(states.values()[1])
-print(states.values()[2])
-print(states.values()[3])
-print(states.values()[4])
-
-print(len(states))
+print(firstDiff([2,3,1,2],[8,3,1,2]))
+print(firstDiff([8,3,1,2],[8,3,4,2]))
+print(firstDiff([8,3,1,2],[8,3,1,2]))
+print(firstDiff([],[]))
