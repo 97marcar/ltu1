@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import csv
 
 class Telefonbok():
     """En klass som innehåller en telefonbok med ett antal olika
-    funktioner(lägg till, ta bort ändra mm.)"""
+    funktioner(lägg till, ta bort ändra mm.)
+    """
     def __init__(self):
         """Konstruktorn, körs när klassen först körs"""
         self.bool1 = True
@@ -13,7 +13,8 @@ class Telefonbok():
 
     def mainMenu(self):
         """Skriver ut menyn till användaren så han/hon enkelt kan
-        se alla typer av kommandon som kan utföras"""
+        se alla typer av kommandon som kan utföras
+        """
         print("\nTelephone book")
         print("Main Menu")
         print("Following commands exists: ")
@@ -70,7 +71,7 @@ class Telefonbok():
         #Nedan skickas data till respektive funktion
         if spaces == 0:
             if givenCommand == "quit":
-                return
+                exit
             elif givenCommand == "mainmenu":
                 self.mainMenu()
             else:
@@ -119,17 +120,15 @@ class Telefonbok():
     def add(self, name, number):
         """Tar in ett namn och ett number som argument och
         lägger till dem i telefonboken så länge nummret inte
-        är upptaget."""
-        self.searchForSameNameAndNumber(name, number)
+        är upptaget.
+        """
+        self.searchForSameNumber(number)
         if self.bool1 == True:
-            if name != number:
-                self.phonebook.append([number,name])
-                print('"A person with the name: "'+name+'" and number: "'+\
-                number+'" entered successfully.')
-                self.command()
-            else:
-                print("The name cannot be the same as number.")
-                self.command()
+            self.phonebook.append([number,name])
+            print('"A person with the name: "'+name+'" and number: "'+\
+            number+'" entered successfully.')
+            self.command()
+
 
         else:
             print("A person with that phonenumber already exists.")
@@ -139,24 +138,19 @@ class Telefonbok():
         """Lägger till namn till de redan existerande personer i
         telefonboken. Tar in namn och alias som argument vilket räcker
         så länge det bara finns en person med samma namn annars behövs
-        nummret också."""
+        nummret också.
+        """
         self.countSameNames(name)
         if self.numberOfNames == 1:
             for n in range(len(self.phonebook)):
                 if self.phonebook[n][0] != alias:
                     if name in self.phonebook[n] and name != self.phonebook[n][0]:
-                        self.searchForSameNameAndNumber(alias, self.phonebook[n][0])
-                        if self.bool1 == True:
                             self.phonebook[n].append(alias)
                             print("Alias added.")
                             self.command()
                             return
-                        else:
-                            print("There is a person with that name and number.")
-                            self.command()
-                            return
                 else:
-                    print("Alias and number cannot be the same.")
+                    print("Alias and another number cannot be the same.")
                     self.command()
                     return
         elif self.numberOfNames > 1 and number == False:
@@ -167,14 +161,9 @@ class Telefonbok():
         elif self.numberOfNames > 1 and number != False:
             for n in range(len(self.phonebook)):
                 if (name in self.phonebook[n] and name != self.phonebook[n][0]) and self.phonebook[n][0] == number:
-                    self.searchForSameNameAndNumber(alias, self.phonebook[n][0])
                     if self.bool1 == True:
                         self.phonebook[n].append(alias)
                         print("Alias added.")
-                        self.command()
-                        return
-                    else:
-                        print("There is a person with that name and number.")
                         self.command()
                         return
             print('There is no contact with that name and number.')
@@ -188,19 +177,20 @@ class Telefonbok():
         """Redigerar det existerande nummret till en kontakt.
         Tar in namn och det nya telefonboken. Det räcker så länge det
         bara finns en person med samma namn annars behövs det gamla
-        nummret också"""
+        nummret också
+        """
         self.countSameNames(name)
         if self.numberOfNames == 1:
             for n in range(len(self.phonebook)):
                 if name in self.phonebook[n] and name != self.phonebook[n][0]:
-                    self.searchForSameNameAndNumber2(name, newnum)
+                    self.searchForSameNumber(newnum)
                     if self.bool1 == True:
                         self.phonebook[n][0] = newnum
                         print("Number changed")
                         self.command()
                         return
                     else:
-                        print("There is a person with that name and number.")
+                        print("There is a person with that number.")
                         self.command()
                         return
 
@@ -212,8 +202,7 @@ class Telefonbok():
 
         elif self.numberOfNames > 1 and currentnum != False:
             for n in range(len(self.phonebook)):
-                print(name, newnum)
-                self.searchForSameNameAndNumber2(name, currentnum)
+                self.searchForSameNumber(newnum)
 
                 if self.bool1 == True:
                     if (name in self.phonebook[n] and name != self.phonebook[n][0]) and self.phonebook[n][0] == currentnum:
@@ -222,7 +211,7 @@ class Telefonbok():
                         self.command()
                         return
                 else:
-                    print("There is a person with that name and number.")
+                    print("There is a person with that number.")
                     self.command()
                     return
             print('There is no contact with that name and number.')
@@ -238,7 +227,7 @@ class Telefonbok():
         self.countSameNames(name)
         if self.numberOfNames == 1:
             for n in range(len(self.phonebook)):
-                if name in self.phonebook[n] and name != self.phonebook[n][0]:
+                if name in self.phonebook[n]:
                     del self.phonebook[n]
                     print("Removed.")
                     self.command()
@@ -251,7 +240,7 @@ class Telefonbok():
 
         elif self.numberOfNames > 1 and number != False:
             for n in range(len(self.phonebook)):
-                if (name in self.phonebook[n] and name != self.phonebook[n][0]) and self.phonebook[n][0] == number:
+                if (name in self.phonebook[n]) and self.phonebook[n][0] == number:
                     del self.phonebook[n]
                     print("Removed.")
                     self.command()
@@ -267,67 +256,59 @@ class Telefonbok():
             self.command()
         else:
             for n in range(len(self.phonebook)):
-                if name in self.phonebook[n] and name != self.phonebook[n][0]:
+                if name in self.phonebook[n]:
                     print(self.phonebook[n][0])
 
             self.command()
             return
 
     def save(self,name):
-        """Sparar telefonboken i en csvfil med namn som väljs av
-        användaren."""
+        """Sparar telefonboken i en txt med namn som väljs av
+        användaren.
+        """
         try:
-            with open(name+".csv","wb") as csvfile:
-                write = csv.writer(csvfile, delimiter=';')
-                for n in range(len(self.phonebook)):
-                    write.writerow(self.phonebook[n])
-                print("File saved.")
+            f = open(name+".txt","w")
+            for n in range(len(self.phonebook)):
+                for i in range(len(self.phonebook[n])):
+                    f.write(self.phonebook[n][i]+";")
+                f.write("\n")
+            f.close()
+            print("File saved.")
         except:
             print("Error saving file.")
+
         self.command()
 
     def load(self,name):
-        """Laddar en csvfil som innehållet en telefonbok."""
-
+        """Laddar en txt som innehållet en telefonbok."""
         try:
-            with open(name+".csv", "rb") as csvfile:
-                self.phonebook = []
-                read = csv.reader(csvfile, delimiter=';')
-                for row in read:
-                    self.phonebook.append(row)
-            self.command()
+            f = open(name+".txt", "r")
+            self.phonebook = []
+            for line in f:
+                line = line.split(";")
+                line.pop()
+                self.phonebook.append(line)
+            f.close()
         except:
-            print("There is no file by that name.")
-            self.command()
+            print("Error")
+
+        self.command()
 
     def countSameNames(self, name):
         """Räknar antalet av samma namn som finns i telefonboken."""
         self.numberOfNames = 0
         for n in range(len(self.phonebook)):
-            if name in self.phonebook[n] and name != self.phonebook[n][0]:
+            if name in self.phonebook[n]:
                 self.numberOfNames += 1
 
-    def searchForSameNameAndNumber(self, name, number):
-        """Kolla om ett nummer och namn finns i ordboken eller inte.
-        Get en variabel värdet sant eller falsk"""
+
+    def searchForSameNumber(self,number):
         for n in range(len(self.phonebook)):
-            if name in self.phonebook[n]:
-                for i in self.phonebook[n]:
-                    if number in self.phonebook[n] and i in self.phonebook[n]:
-                        self.bool1 = False
-                        return
+            if number in self.phonebook[n][0]:
+                self.bool1 = False
+                return
         self.bool1 = True
 
-    def searchForSameNameAndNumber2(self, name, number):
-        """Kolla om ett nummer och namn finns i ordboken eller inte.
-        Get en variabel värdet sant eller falsk."""
-        for n in range(len(self.phonebook)):
-            if number in self.phonebook[n]:
-                for i in self.phonebook[n]:
-                    if i in self.phonebook[n]:
-                        self.bool1 = False
-                        return
-        self.bool1 = True
 
 
 Telefonbok()
