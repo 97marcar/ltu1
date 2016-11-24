@@ -1,15 +1,14 @@
-import csv
-lista = [["abc","123","hehe"]]
 
-with open("test.csv","wb") as csvfile:
-    write = csv.writer(csvfile, delimiter=';')
-    for n in range(len(lista)):
-        write.writerow(lista[n])
+def firstDiff(lst1, lst2):
+    if lst1 == lst2:
+        return len(lst1)
+    elif lst1[0] != lst2[0]:
+        return 0
+    else:
+        return (1 + firstDiff(lst1[1:],lst2[1:]))
 
-lista = ["aaa"]
-with open('test.csv', 'rb') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=';')
-    for row in spamreader:
-        lista.append(row)
 
-print lista
+print(firstDiff([2,3,1,2],[8,3,1,2]))
+print(firstDiff([8,3,1,2],[8,3,4,2]))
+print(firstDiff([8,3,1,2],[8,3,1,2]))
+print(firstDiff([],[]))
